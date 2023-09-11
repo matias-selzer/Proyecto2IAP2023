@@ -23,21 +23,21 @@ public class Personaje : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            ActivateGraphics(right);
+            UpdateGraphics(right);
             Mover(X, ++Y);
         }else if (Input.GetKeyDown(KeyCode.A))
         {
-            ActivateGraphics(left);
+            UpdateGraphics(left);
             Mover(X, --Y);
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            ActivateGraphics(up);
+            UpdateGraphics(up);
             Mover(--X, Y);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            ActivateGraphics(down);
+            UpdateGraphics(down);
             Mover(++X, Y);
         }
 
@@ -52,7 +52,7 @@ public class Personaje : MonoBehaviour
         Y = posY;
     }
 
-    private void ActivateGraphics(GameObject toActivate)
+    private void UpdateGraphics(GameObject toActivate)
     {
         up.SetActive(false);
         down.SetActive(false);

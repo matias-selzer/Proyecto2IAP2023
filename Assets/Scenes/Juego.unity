@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2062718567}
   - component: {fileID: 2062718566}
+  - component: {fileID: 2062718568}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -158,6 +159,7 @@ MonoBehaviour:
   jarron: {fileID: 3956864845004347026, guid: 5c6a1648d6f5d8b45997037cbb0ea5ff, type: 3}
   personaje: {fileID: 5100612943295055479, guid: 844126bef6238f34bad8695693435c3e,
     type: 3}
+  factory: {fileID: 2062718568}
 --- !u!4 &2062718567
 Transform:
   m_ObjectHideFlags: 0
@@ -173,6 +175,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2062718568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062718565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85844bbec5c3fc7469e3ef19bf4c8de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objetosDelJuego:
+  - code: 48
+    alturaInicial: 0.5
+    costo: 10
+    objectPrefab: {fileID: 7400556488101680458, guid: b01448c101d431b49b50a5c80818d6c8,
+      type: 3}
+  - code: 49
+    alturaInicial: 0
+    costo: 10000
+    objectPrefab: {fileID: 8997525750765969504, guid: 9435b9a79c007494eb5bc442253d082e,
+      type: 3}
+  - code: 50
+    alturaInicial: 0.4
+    costo: 1000
+    objectPrefab: {fileID: 5284406570180094706, guid: ad36c3d044d312e44a986a07f2c7f0b2,
+      type: 3}
+  - code: 51
+    alturaInicial: 0
+    costo: 1000
+    objectPrefab: {fileID: 3956864845004347026, guid: 5c6a1648d6f5d8b45997037cbb0ea5ff,
+      type: 3}
 --- !u!1 &2094382571
 GameObject:
   m_ObjectHideFlags: 0
