@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grilla 
+public class Mapa 
 {
     private Node[,] grilla;
 
-    public Grilla(int tamañoX, int tamañoY)
+    public Mapa(int tamañoX, int tamañoY)
     {
         grilla = new Node[tamañoX, tamañoY];
         Debug.Log("Tamaño X: " + tamañoX);
@@ -44,7 +44,7 @@ public class Grilla
                             //Debug.Log("i: " + i + " - j: " + j);
                             //Debug.Log("     h: " + h + " - k: " + k);
                             //Debug.Log(grilla[h, k] == null);
-                            nodoActual.AddVecino(grilla[h, k]);
+                            //nodoActual.AddVecino(grilla[h, k]);
                         }
                     }
                 }

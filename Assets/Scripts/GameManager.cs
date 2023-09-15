@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     //public GameObject camara;
     public Factory factory;
 
-    private Grilla grilla;
+    private Mapa grilla;
     private Personaje personajeActual;
 
     // Start is called before the first frame update
@@ -46,7 +46,8 @@ public class GameManager : MonoBehaviour
                 int costo = factory.GetCosto(objectCode);
 
                 GameObject nuevoObjecto = Instantiate(objectPrefab, new Vector3(i, alturaInicial, j), Quaternion.identity) as GameObject;
-                Node nuevoNodo = new Node(i, j, costo);
+                Node nuevoNodo = new Node(i, j);
+                //crear objeto ambiente con costo y agregarselo al nodo
                 grilla.AddNode(nuevoNodo, i, j);
 
             }
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void CrearGrilla(int tamañox, int tamañoy)
     {
-        grilla = new Grilla(tamañox, tamañoy);
+        grilla = new Mapa(tamañox, tamañoy);
     }
 
     private void AsignarVecinos()
