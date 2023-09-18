@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Teclado : NoArtificial
 {
-    public List<Node> CalcularMovimiento(List<Node> conocimiento, Node nodoActual)
+    public List<Node> CalcularMovimiento(List<Node> conocimiento, List<Node> objetivos, Node nodoActual)
     {
         List<Node> camino = new List<Node>();
         if (Input.GetKey(KeyCode.D))

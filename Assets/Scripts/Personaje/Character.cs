@@ -30,7 +30,7 @@ public class Character : Entidad
         //Debug.Log("Conocimiento: " + conocimiento.Count);
         if (camino.Count == 0)
         {
-            camino= inteligencia.CalcularMovimiento(conocimiento,NodoActual);
+            camino= inteligencia.CalcularMovimiento(conocimiento,conocimiento,NodoActual);
         }
         else
         {

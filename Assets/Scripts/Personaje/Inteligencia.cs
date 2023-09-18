@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface Inteligencia 
 {
-    public List<Node> CalcularMovimiento(List<Node> conocimiento, Node nodoActual);
+    public List<Node> CalcularMovimiento(List<Node> conocimiento, List<Node> objetivos, Node nodoActual);
 }
