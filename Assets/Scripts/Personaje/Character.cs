@@ -27,6 +27,7 @@ public class Character : Entidad
 
     public void Mover(GameManager gameManager)
     {
+        //Debug.Log("Conocimiento: " + conocimiento.Count);
         if (camino.Count == 0)
         {
             camino= inteligencia.CalcularMovimiento(conocimiento,NodoActual);
@@ -35,7 +36,7 @@ public class Character : Entidad
         {
             Node nodoSiguiente = camino[0];
             camino.Remove(nodoSiguiente);
-            gameManager.MoverPersonaje(nodoSiguiente);
+            gameManager.MoverPersonajeDeNodo(nodoSiguiente);
         }
         
     }
@@ -75,6 +76,11 @@ public class Character : Entidad
                 conocimiento.Add(n);
             }
         }
+    }
+
+    public override void SerVisitado(GameManager gameManager)
+    {
+        //Debug.Log("Me visitan - soy el Personaje");
     }
 
 }

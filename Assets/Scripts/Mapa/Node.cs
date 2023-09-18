@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,14 +26,22 @@ public class Node
     public void AddEntity(Entidad entidad)
     {
         entidades.Add(entidad);
-        entidad.NodoActual = this;
+        //entidad.NodoActual = this;
     }
 
-    public void SerVisitado()
+    public void SerVisitado(GameManager gameManager)
     {
-        foreach(Entidad e in entidades)
+        try
         {
-            e.SerVisitado();
+            foreach (Entidad e in entidades)
+            {
+                e.SerVisitado(gameManager);
+            }
         }
+        catch (Exception e)
+        {
+
+        }
+        
     }
 }

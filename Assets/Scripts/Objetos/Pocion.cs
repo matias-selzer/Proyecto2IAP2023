@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Piso : ObjetoAmbiente
+public class Pocion : Tesoro
 {
-    public Piso(RepresentacionGrafica rep)
+    public Pocion(RepresentacionGrafica rep)
     {
         representacionGrafica = rep;
     }
 
     public override void SerVisitado(GameManager gameManager)
     {
-        //Debug.Log("Me visitan - soy el Piso");
+        representacionGrafica.DestroyGraphics();
+        NodoActual.RemoveEntity(this);
+        gameManager.AgarrarPocion();
     }
 }

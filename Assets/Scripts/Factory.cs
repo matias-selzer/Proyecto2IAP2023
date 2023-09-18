@@ -74,8 +74,13 @@ public class Factory : MonoBehaviour
         }
         else if (objectCode == '2')
         {
-            nuevaEntidad = new Tesoro(repGrafica);
+            nuevaEntidad = new Pocion(repGrafica);
         }
+        else if (objectCode == '3')
+        {
+            nuevaEntidad = new Pocion(repGrafica);
+        }
+
 
         return nuevaEntidad;
     }

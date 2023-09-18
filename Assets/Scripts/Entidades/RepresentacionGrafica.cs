@@ -22,4 +22,9 @@ public class RepresentacionGrafica
         representacionGrafica = toActivate;
         representacionGrafica.SetActive(true);
     }
+
+    public void DestroyGraphics()
+    {
+        GameObject.Destroy(representacionGrafica);
+    }
 }

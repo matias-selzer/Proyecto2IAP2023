@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private Mapa grilla;
     private Character personaje;
 
+    private Node nodoAnterior;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
                 //GameObject nuevoObjecto = Instantiate(objectPrefab, new Vector3(i, alturaInicial, j), Quaternion.identity) as GameObject;
                 Node nuevoNodo = new Node(i, j);
                 nuevoNodo.AddEntity(nuevaEntidad);
+                nuevaEntidad.NodoActual = nuevoNodo;
                 //crear objeto ambiente con costo y agregarselo al nodo
                 grilla.AddNode(nuevoNodo, i, j);
 
@@ -77,6 +80,7 @@ public class GameManager : MonoBehaviour
         personaje= GetComponent<CharacterFactory>().CrearPersonaje(posX,posY);
         personaje.ActualizarConocimiento(ObtenerContexto(posX,posY,5));
         grilla.AddEntity(posX, posY, personaje);
+        personaje.NodoActual = grilla.ObtenerNodo(posX, posY);
     }
 
     private List<Node> ObtenerContexto(int posX,int posY, int distancia)
@@ -99,12 +103,33 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void MoverPersonaje(Node nodoSiguiente)
+    public void MoverPersonajeDeNodo(Node nodoSiguiente)
     {
-        Node nodoAnterior = personaje.NodoActual;
+        nodoAnterior = personaje.NodoActual;
         personaje.NodoActual.RemoveEntity(personaje);
         personaje.NodoActual = nodoSiguiente;
         nodoSiguiente.AddEntity(personaje);
         personaje.UpdateRepresentacionGrafica();
+        nodoSiguiente.SerVisitado(this);
+    }
+
+    private void VolverPersonaje()
+    {
+        personaje.NodoActual.RemoveEntity(personaje);
+        personaje.NodoActual = nodoAnterior;
+        nodoAnterior.AddEntity(personaje);
+        personaje.UpdateRepresentacionGrafica();
+    }
+
+    public void ColisionConPared()
+    {
+        VolverPersonaje();
+    }
+
+
+    public void AgarrarPocion()
+    {
+        //sumar puntos o lo que sea
+        Debug.Log("Agarre una poción");
     }
 }

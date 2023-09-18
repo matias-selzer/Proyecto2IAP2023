@@ -9,8 +9,8 @@ public class Pared : ObjetoAmbiente
         representacionGrafica = rep;
     }
 
-    public override void SerVisitado()
+    public override void SerVisitado(GameManager gameManager)
     {
-        Debug.Log("Me visitan - soy la Pared");
+        gameManager.ColisionConPared();
     }
 }
