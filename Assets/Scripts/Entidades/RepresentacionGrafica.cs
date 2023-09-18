@@ -13,7 +13,8 @@ public class RepresentacionGrafica
 
     public void MoveGraphics(int posX, int posY)
     {
-        throw new System.NotImplementedException();
+        representacionGrafica.transform.position = new Vector3(posX, representacionGrafica.transform.position.y, posY);
+
     }
 
     public void UpdateGraphics(GameObject toActivate)

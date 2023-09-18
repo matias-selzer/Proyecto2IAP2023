@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Personaje : Entidad
+public class Character : Entidad
 {
     private Inteligencia inteligencia;
     private List<Node> conocimiento;
+    private List<Node> camino;
    
 
-    public Personaje(Inteligencia i, RepresentacionGrafica rep)
+    public Character(Inteligencia i, RepresentacionGrafica rep)
     {
         representacionGrafica = rep;
         inteligencia = i;
         conocimiento = new List<Node>();
+        camino = new List<Node>();
     }
    
         //transform.position = Vector3.Lerp(transform.position, targetPosition, 5 * Time.deltaTime);
@@ -23,9 +25,19 @@ public class Personaje : Entidad
     
     
 
-    public void Mover()
+    public void Mover(GameManager gameManager)
     {
-        inteligencia.CalcularMovimiento(this);
+        if (camino.Count == 0)
+        {
+            camino= inteligencia.CalcularMovimiento(conocimiento,NodoActual);
+        }
+        else
+        {
+            Node nodoSiguiente = camino[0];
+            camino.Remove(nodoSiguiente);
+            gameManager.MoverPersonaje(nodoSiguiente);
+        }
+        
     }
     /*
     public void MoverDerecha()

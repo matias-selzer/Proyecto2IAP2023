@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public Factory factory;
 
     private Mapa grilla;
-    private Personaje personaje;
+    private Character personaje;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         ReadMap();
        // AsignarVecinos();
         CrearPersonaje(3,3); //hallar lugar libre
-        InvokeRepeating("MoverPersonaje", 0, 1);
+        InvokeRepeating("MoverPersonaje", 0, 0.3f);
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public void MoverPersonaje()
     {
         personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,5));
-        personaje.Mover();
+        personaje.Mover(this);
     }
 
 
@@ -96,5 +96,15 @@ public class GameManager : MonoBehaviour
             }
         }
         return contexto;
+    }
+
+
+    public void MoverPersonaje(Node nodoSiguiente)
+    {
+        Node nodoAnterior = personaje.NodoActual;
+        personaje.NodoActual.RemoveEntity(personaje);
+        personaje.NodoActual = nodoSiguiente;
+        nodoSiguiente.AddEntity(personaje);
+        personaje.UpdateRepresentacionGrafica();
     }
 }

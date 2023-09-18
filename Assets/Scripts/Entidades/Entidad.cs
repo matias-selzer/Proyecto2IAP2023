@@ -10,6 +10,11 @@ public abstract class Entidad
 
     public Node NodoActual { get => nodoActual; set => nodoActual = value; }
 
+    public virtual void UpdateRepresentacionGrafica()
+    {
+        representacionGrafica.MoveGraphics(nodoActual.PosX, nodoActual.PosY);
+    }
+
     public virtual void SerVisitado()
     {
         Debug.Log("Me visitan - soy una Entidad");

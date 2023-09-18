@@ -6,17 +6,13 @@ public class CharacterFactory : MonoBehaviour
 {
     public GameObject representacionGraficaPrefab;
 
-    public Personaje CrearPersonaje(int posX,int posY)
+    public Character CrearPersonaje(int posX,int posY)
     {
         Inteligencia i = new Teclado();
-        GameObject representacionGraficaPersonaje = Instantiate(representacionGraficaPrefab, new Vector3(posX, 0, posY), Quaternion.identity) as GameObject;
+        GameObject representacionGraficaPersonaje = Instantiate(representacionGraficaPrefab, new Vector3(posX, 0, posY), representacionGraficaPrefab.transform.rotation) as GameObject;
         RepresentacionGrafica r = new RepresentacionGrafica(representacionGraficaPersonaje);
-        Personaje p = new Personaje(i, r);
+        Character p = new Character(i, r);
         return p;
     }
 
-    private void MoverPersonajeInicial(GameObject p)
-    {
-        p.transform.position=(new Vector3(3, 0, 3));
-    }
 }

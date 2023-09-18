@@ -4,23 +4,77 @@ using UnityEngine;
 
 public class Teclado : NoArtificial
 {
-    public void CalcularMovimiento(Personaje personaje)
+    public List<Node> CalcularMovimiento(List<Node> conocimiento, Node nodoActual)
     {
-        /*if (Input.GetKeyDown(KeyCode.D))
+        List<Node> camino = new List<Node>();
+        if (Input.GetKey(KeyCode.D))
         {
-            personaje.MoverDerecha();
+            camino.Add(BuscarNodoAbajo(conocimiento, nodoActual));
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            personaje.MoverIzquierda();
+            camino.Add(BuscarNodoArriba(conocimiento, nodoActual));
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W))
         {
-            personaje.MoverArriba();
+            camino.Add(BuscarNodoIzquierda(conocimiento, nodoActual));
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            personaje.MoverAbajo();
-        }*/
+            camino.Add(BuscarNodoDerecha(conocimiento, nodoActual));
+        }
+        return camino;
+    }
+
+    private Node BuscarNodoDerecha(List<Node> conocimiento, Node nodoActual)
+    {
+        Node nuevoNodo = conocimiento[0];
+        foreach(Node n in conocimiento)
+        {
+            if(n.PosX==nodoActual.PosX+1 && n.PosY == nodoActual.PosY)
+            {
+                nuevoNodo = n;
+            }
+        }
+        return nuevoNodo;
+    }
+
+    private Node BuscarNodoIzquierda(List<Node> conocimiento, Node nodoActual)
+    {
+        Node nuevoNodo = conocimiento[0];
+        foreach (Node n in conocimiento)
+        {
+            if (n.PosX == nodoActual.PosX - 1 && n.PosY == nodoActual.PosY)
+            {
+                nuevoNodo = n;
+            }
+        }
+        return nuevoNodo;
+    }
+
+    private Node BuscarNodoArriba(List<Node> conocimiento, Node nodoActual)
+    {
+        Node nuevoNodo = conocimiento[0];
+        foreach (Node n in conocimiento)
+        {
+            if (n.PosX == nodoActual.PosX && n.PosY == nodoActual.PosY-1)
+            {
+                nuevoNodo = n;
+            }
+        }
+        return nuevoNodo;
+    }
+
+    private Node BuscarNodoAbajo(List<Node> conocimiento, Node nodoActual)
+    {
+        Node nuevoNodo = conocimiento[0];
+        foreach (Node n in conocimiento)
+        {
+            if (n.PosX == nodoActual.PosX && n.PosY == nodoActual.PosY + 1)
+            {
+                nuevoNodo = n;
+            }
+        }
+        return nuevoNodo;
     }
 }
