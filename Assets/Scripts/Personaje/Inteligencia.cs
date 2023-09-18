@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface Inteligencia 
 {
-   
+    public void CalcularMovimiento(Personaje personaje);
 }

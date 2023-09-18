@@ -2,64 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Personaje : MonoBehaviour
+public class Personaje : Entidad
 {
-    private int x, y;
-    private Vector3 targetPosition;
+    private Inteligencia inteligencia;
+    private Mapa mapa;
 
-    public GameObject up, down, left, right;
+    private int posX, posY;
 
-    public int X { get => x; set => x = value; }
-    public int Y { get => y; set => y = value; }
+    public int PosX { get => posX; set => posX = value; }
+    public int PosY { get => posY; set => posY = value; }
+    public Mapa Mapa { get => mapa; set => mapa = value; }
 
-    // Start is called before the first frame update
-    void Start()
+    public Personaje(Inteligencia i, RepresentacionGrafica rep)
     {
-        targetPosition = transform.position;
+        representacionGrafica = rep;
+        inteligencia = i;
+    }
+   
+        //transform.position = Vector3.Lerp(transform.position, targetPosition, 5 * Time.deltaTime);
+    
+
+
+
+    
+    
+
+    public void CalcularMomiviento()
+    {
+        inteligencia.CalcularMovimiento(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoverDerecha()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            UpdateGraphics(right);
-            Mover(X, ++Y);
-        }else if (Input.GetKeyDown(KeyCode.A))
-        {
-            UpdateGraphics(left);
-            Mover(X, --Y);
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            UpdateGraphics(up);
-            Mover(--X, Y);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            UpdateGraphics(down);
-            Mover(++X, Y);
-        }
-
-        transform.position = Vector3.Lerp(transform.position, targetPosition, 5 * Time.deltaTime);
+        Mapa.MoverPersonajeDerecha();
+        representacionGrafica.UpdateGraphics(((RepGraficaMultiple)representacionGrafica).RightRep);
+        representacionGrafica.MoveGraphics(PosY, PosX);
     }
-
-
-    public void Mover(int posX,int posY)
+    public void MoverIzquierda()
     {
-        targetPosition = new Vector3(posX, 1, posY);
-        X = posX;
-        Y = posY;
+        Mapa.MoverPersonajeIzquierda();
+        representacionGrafica.UpdateGraphics(((RepGraficaMultiple)representacionGrafica).LeftRep);
+        representacionGrafica.MoveGraphics(PosY, PosX);
     }
-
-    private void UpdateGraphics(GameObject toActivate)
+    public void MoverArriba()
     {
-        up.SetActive(false);
-        down.SetActive(false);
-        right.SetActive(false);
-        left.SetActive(false);
-        toActivate.SetActive(true);
+        Mapa.MoverPersonajeArriba();
+        representacionGrafica.UpdateGraphics(((RepGraficaMultiple)representacionGrafica).UpRep);
+        representacionGrafica.MoveGraphics(PosY, PosX);
     }
-
+    public void MoverAbajo()
+    {
+        mapa.MoverPersonajeAbajo();
+        representacionGrafica.UpdateGraphics(((RepGraficaMultiple)representacionGrafica).DownRep);
+        representacionGrafica.MoveGraphics(PosY, PosX);
+    }
 
 }

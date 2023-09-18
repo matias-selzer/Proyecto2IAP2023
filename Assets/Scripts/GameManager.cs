@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject pared, piso, caja, jarron,personaje;
     //public GameObject camara;
     public Factory factory;
 
     private Mapa grilla;
-    private Personaje personajeActual;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +20,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        grilla.Personaje.CalcularMomiviento();
     }
 
 
@@ -41,12 +39,13 @@ public class GameManager : MonoBehaviour
             for (int j = 0; j < tamañoy; j++)
             {
                 char objectCode = lineas[i].ToCharArray()[j];
-                float alturaInicial = factory.GetAltura(objectCode);
-                GameObject objectPrefab = factory.GetPrefab(objectCode);
-                int costo = factory.GetCosto(objectCode);
 
-                GameObject nuevoObjecto = Instantiate(objectPrefab, new Vector3(i, alturaInicial, j), Quaternion.identity) as GameObject;
+                Entidad nuevaEntidad=factory.CreateEntity(objectCode, i, j);
+                
+
+                //GameObject nuevoObjecto = Instantiate(objectPrefab, new Vector3(i, alturaInicial, j), Quaternion.identity) as GameObject;
                 Node nuevoNodo = new Node(i, j);
+                nuevoNodo.AddEntity(nuevaEntidad);
                 //crear objeto ambiente con costo y agregarselo al nodo
                 grilla.AddNode(nuevoNodo, i, j);
 
@@ -67,8 +66,9 @@ public class GameManager : MonoBehaviour
  
     private void CrearPersonaje(int posX,int posY)
     {
-        GameObject personajeGrafico = Instantiate(personaje) as GameObject;
-        personajeActual = personajeGrafico.GetComponent<Personaje>();
-        personajeActual.Mover(posX, posY);
+        grilla.Personaje= GetComponent<CharacterFactory>().CrearPersonaje();
+        grilla.Personaje.PosX = posX;
+        grilla.Personaje.PosY = posY;
+        grilla.Personaje.Mapa = grilla;
     }
 }

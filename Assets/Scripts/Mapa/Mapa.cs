@@ -5,12 +5,20 @@ using UnityEngine;
 public class Mapa 
 {
     private Node[,] grilla;
+    private Personaje personaje;
+
+    public Personaje Personaje { get => personaje; set => personaje = value; }
 
     public Mapa(int tamañoX, int tamañoY)
     {
         grilla = new Node[tamañoX, tamañoY];
         Debug.Log("Tamaño X: " + tamañoX);
         Debug.Log("Tamaño Y: " + tamañoY);
+    }
+
+    public void SetPersonaje(Personaje p)
+    {
+        Personaje = p;
     }
 
     public void AddNode(Node n,int x,int y)
@@ -26,6 +34,48 @@ public class Mapa
     public int ObtenerTamañoY()
     {
         return grilla.GetLength(1);
+    }
+
+    public void MoverPersonajeDerecha()
+    {
+        if (personaje.PosX < ObtenerTamañoX() - 1)
+        {
+            personaje.PosX++;
+            VisitarNodo();
+        }
+    }
+    public void MoverPersonajeIzquierda()
+    {
+        if (personaje.PosX > 0)
+        {
+            personaje.PosX--;
+            VisitarNodo();
+        }
+    }
+    public void MoverPersonajeArriba()
+    {
+        if (personaje.PosY > 0)
+        {
+            personaje.PosY--;
+            VisitarNodo();
+        }
+    }
+    public void MoverPersonajeAbajo()
+    {
+        if (personaje.PosY < ObtenerTamañoY() - 1)
+        {
+            personaje.PosY++;
+            VisitarNodo();
+        }
+    }
+
+    public void VisitarNodo()
+    {
+        int posX = personaje.PosY;
+        int posY = personaje.PosX;
+
+        Node nodoActual = grilla[posX, posY];
+        nodoActual.SerVisitado();
     }
 
     public void AsignarVecinos()

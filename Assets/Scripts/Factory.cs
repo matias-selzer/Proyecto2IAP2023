@@ -54,4 +54,29 @@ public class Factory : MonoBehaviour
         }
         return prefab;
     }
+
+    public Entidad CreateEntity(char objectCode, int posx,int posy)
+    {
+        Entidad nuevaEntidad;
+
+        float alturaInicial = GetAltura(objectCode);
+        GameObject objectPrefab = GetPrefab(objectCode);
+        int costo = GetCosto(objectCode);
+
+        GameObject instancia = Instantiate(objectPrefab, new Vector3(posx, alturaInicial, posy), Quaternion.identity);
+        RepresentacionGrafica repGrafica = new RepGraficaUnica(instancia);
+
+        nuevaEntidad = new Piso(repGrafica);
+        
+        if (objectCode == '1')
+        {
+            nuevaEntidad = new Pared(repGrafica);
+        }
+        else if (objectCode == '2')
+        {
+            nuevaEntidad = new Tesoro(repGrafica);
+        }
+
+        return nuevaEntidad;
+    }
 }
