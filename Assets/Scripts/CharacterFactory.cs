@@ -4,23 +4,13 @@ using UnityEngine;
 
 public class CharacterFactory : MonoBehaviour
 {
-    public GameObject repLeft, repRight, repUp, repDown;
+    public GameObject representacionGraficaPrefab;
 
-    public Personaje CrearPersonaje()
+    public Personaje CrearPersonaje(int posX,int posY)
     {
         Inteligencia i = new Teclado();
-        GameObject up = Instantiate(repUp) as GameObject;
-        GameObject down = Instantiate(repDown) as GameObject;
-        GameObject left = Instantiate(repLeft) as GameObject;
-        GameObject right = Instantiate(repRight) as GameObject;
-        MoverPersonajeInicial(up);
-        MoverPersonajeInicial(down);
-        MoverPersonajeInicial(left);
-        MoverPersonajeInicial(right);
-        up.SetActive(false);
-        right.SetActive(false);
-        left.SetActive(false);
-        RepresentacionGrafica r = new RepGraficaMultiple(up,down,left,right);
+        GameObject representacionGraficaPersonaje = Instantiate(representacionGraficaPrefab, new Vector3(posX, 0, posY), Quaternion.identity) as GameObject;
+        RepresentacionGrafica r = new RepresentacionGrafica(representacionGraficaPersonaje);
         Personaje p = new Personaje(i, r);
         return p;
     }

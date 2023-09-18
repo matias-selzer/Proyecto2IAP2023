@@ -2,8 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RepresentacionGrafica 
+public class RepresentacionGrafica 
 {
-    public abstract void UpdateGraphics(GameObject toActivate);
-    public abstract void MoveGraphics(int posX, int posY);
+    private GameObject representacionGrafica;
+
+    public RepresentacionGrafica(GameObject rep)
+    {
+        representacionGrafica = rep;
+    }
+
+    public void MoveGraphics(int posX, int posY)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void UpdateGraphics(GameObject toActivate)
+    {
+        representacionGrafica = toActivate;
+        representacionGrafica.SetActive(true);
+    }
 }

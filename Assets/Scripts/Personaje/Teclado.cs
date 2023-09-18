@@ -6,7 +6,7 @@ public class Teclado : NoArtificial
 {
     public void CalcularMovimiento(Personaje personaje)
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        /*if (Input.GetKeyDown(KeyCode.D))
         {
             personaje.MoverDerecha();
         }
@@ -21,6 +21,6 @@ public class Teclado : NoArtificial
         else if (Input.GetKeyDown(KeyCode.S))
         {
             personaje.MoverAbajo();
-        }
+        }*/
     }
 }

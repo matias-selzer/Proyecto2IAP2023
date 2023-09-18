@@ -25,6 +25,7 @@ public class Node
     public void AddEntity(Entidad entidad)
     {
         entidades.Add(entidad);
+        entidad.NodoActual = this;
     }
 
     public void SerVisitado()

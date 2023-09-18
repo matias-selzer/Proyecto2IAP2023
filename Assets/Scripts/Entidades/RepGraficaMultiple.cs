@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RepGraficaMultiple : RepresentacionGrafica
+public class RepGraficaMultiple 
 {
     private GameObject upRep, downRep, leftRep, rightRep;
 
@@ -19,7 +19,7 @@ public class RepGraficaMultiple : RepresentacionGrafica
     public GameObject LeftRep { get => leftRep; set => leftRep = value; }
     public GameObject RightRep { get => rightRep; set => rightRep = value; }
 
-    public override void MoveGraphics(int posX, int posZ)
+    public  void MoveGraphics(int posX, int posZ)
     {
         upRep.transform.position = new Vector3(posX, upRep.transform.position.y, posZ);
         downRep.transform.position = new Vector3(posX, downRep.transform.position.y, posZ);
@@ -27,7 +27,7 @@ public class RepGraficaMultiple : RepresentacionGrafica
         rightRep.transform.position = new Vector3(posX, rightRep.transform.position.y, posZ);
     }
 
-    public override void UpdateGraphics(GameObject toActivate)
+    public  void UpdateGraphics(GameObject toActivate)
     {
         UpRep.SetActive(false);
         DownRep.SetActive(false);

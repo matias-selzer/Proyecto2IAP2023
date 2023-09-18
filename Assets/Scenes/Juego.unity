@@ -299,11 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0801fda17376b5344819311dba95de5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repLeft: {fileID: 8239154743844426304, guid: 96b11d2ee02339441994ec2e87754161, type: 3}
-  repRight: {fileID: 8050139638473510372, guid: 3a66e644a8f8a6f4d9fb90a693fce33a,
+  representacionGraficaPrefab: {fileID: 1724090410200030909, guid: 632ad97ab066f7c45a755281cbe266be,
     type: 3}
-  repUp: {fileID: 245729507332592728, guid: 21ee5662cf13f1b44ab4448eb7f2c4c9, type: 3}
-  repDown: {fileID: 1724090410200030909, guid: 632ad97ab066f7c45a755281cbe266be, type: 3}
 --- !u!1 &2094382571
 GameObject:
   m_ObjectHideFlags: 0

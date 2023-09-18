@@ -5,18 +5,14 @@ using UnityEngine;
 public class Personaje : Entidad
 {
     private Inteligencia inteligencia;
-    private Mapa mapa;
-
-    private int posX, posY;
-
-    public int PosX { get => posX; set => posX = value; }
-    public int PosY { get => posY; set => posY = value; }
-    public Mapa Mapa { get => mapa; set => mapa = value; }
+    private List<Node> conocimiento;
+   
 
     public Personaje(Inteligencia i, RepresentacionGrafica rep)
     {
         representacionGrafica = rep;
         inteligencia = i;
+        conocimiento = new List<Node>();
     }
    
         //transform.position = Vector3.Lerp(transform.position, targetPosition, 5 * Time.deltaTime);
@@ -27,11 +23,11 @@ public class Personaje : Entidad
     
     
 
-    public void CalcularMomiviento()
+    public void Mover()
     {
         inteligencia.CalcularMovimiento(this);
     }
-
+    /*
     public void MoverDerecha()
     {
         Mapa.MoverPersonajeDerecha();
@@ -55,6 +51,18 @@ public class Personaje : Entidad
         mapa.MoverPersonajeAbajo();
         representacionGrafica.UpdateGraphics(((RepGraficaMultiple)representacionGrafica).DownRep);
         representacionGrafica.MoveGraphics(PosY, PosX);
+    }*/
+
+    public void ActualizarConocimiento(List<Node> contexto)
+    {
+        //hacer que agregue una copia del noto y no una referencia
+        foreach(Node n in contexto)
+        {
+            if (!conocimiento.Contains(n))
+            {
+                conocimiento.Add(n);
+            }
+        }
     }
 
 }

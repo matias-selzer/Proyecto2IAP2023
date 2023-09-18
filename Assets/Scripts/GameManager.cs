@@ -8,19 +8,27 @@ public class GameManager : MonoBehaviour
     public Factory factory;
 
     private Mapa grilla;
+    private Personaje personaje;
 
     // Start is called before the first frame update
     void Start()
     {
         ReadMap();
-        AsignarVecinos();
+       // AsignarVecinos();
         CrearPersonaje(3,3); //hallar lugar libre
+        InvokeRepeating("MoverPersonaje", 0, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        grilla.Personaje.CalcularMomiviento();
+       
+    }
+
+    public void MoverPersonaje()
+    {
+        personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,5));
+        personaje.Mover();
     }
 
 
@@ -58,17 +66,35 @@ public class GameManager : MonoBehaviour
         grilla = new Mapa(tamañox, tamañoy);
     }
 
-    private void AsignarVecinos()
+    /*private void AsignarVecinos()
     {
         grilla.AsignarVecinos();
-    }
+    }*/
 
  
     private void CrearPersonaje(int posX,int posY)
     {
-        grilla.Personaje= GetComponent<CharacterFactory>().CrearPersonaje();
-        grilla.Personaje.PosX = posX;
-        grilla.Personaje.PosY = posY;
-        grilla.Personaje.Mapa = grilla;
+        personaje= GetComponent<CharacterFactory>().CrearPersonaje(posX,posY);
+        personaje.ActualizarConocimiento(ObtenerContexto(posX,posY,5));
+        grilla.AddEntity(posX, posY, personaje);
+    }
+
+    private List<Node> ObtenerContexto(int posX,int posY, int distancia)
+    {
+        List<Node> contexto = new List<Node>();
+        for (int i = posX - distancia / 2; i < posX + distancia / 2; i++)
+        {
+            if (grilla.DentroDeLasFilas(i))
+            {
+                for (int j = posY - distancia / 2; j < posY + distancia / 2; j++)
+                {
+                    if (grilla.DentroDeLasColumnas(j))
+                    {
+                        contexto.Add(grilla.ObtenerNodo(i, j));
+                    }
+                }
+            }
+        }
+        return contexto;
     }
 }

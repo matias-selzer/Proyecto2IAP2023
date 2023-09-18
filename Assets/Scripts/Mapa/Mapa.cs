@@ -4,38 +4,36 @@ using UnityEngine;
 
 public class Mapa 
 {
-    private Node[,] grilla;
-    private Personaje personaje;
+    private Node[,] mapa;
 
-    public Personaje Personaje { get => personaje; set => personaje = value; }
-
+    
     public Mapa(int tamañoX, int tamañoY)
     {
-        grilla = new Node[tamañoX, tamañoY];
+        mapa = new Node[tamañoX, tamañoY];
         Debug.Log("Tamaño X: " + tamañoX);
         Debug.Log("Tamaño Y: " + tamañoY);
     }
 
-    public void SetPersonaje(Personaje p)
+    public Node ObtenerNodo(int posX,int posY)
     {
-        Personaje = p;
+        return mapa[posX, posY];
     }
 
     public void AddNode(Node n,int x,int y)
     {
-        grilla[x, y] = n;
+        mapa[x, y] = n;
     }
 
     public int ObtenerTamañoX()
     {
-        return grilla.GetLength(0);
+        return mapa.GetLength(0);
     }
 
     public int ObtenerTamañoY()
     {
-        return grilla.GetLength(1);
+        return mapa.GetLength(1);
     }
-
+    /*
     public void MoverPersonajeDerecha()
     {
         if (personaje.PosX < ObtenerTamañoX() - 1)
@@ -100,7 +98,7 @@ public class Mapa
                 }
             }
         }
-    }
+    }*/
 
     public bool DentroDeLasFilas(int h)
     {
@@ -115,6 +113,11 @@ public class Mapa
     public bool NodoDistinto(int i, int j, int h, int k)
     {
         return !(h == i && k == j);
+    }
+
+    public void AddEntity(int posX,int posY, Entidad e)
+    {
+        mapa[posX, posY].AddEntity(e);
     }
 
 }

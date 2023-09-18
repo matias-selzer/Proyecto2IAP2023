@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RepGraficaUnica : RepresentacionGrafica
+public class RepGraficaUnica 
 {
     private GameObject representacionGrafica;
 
@@ -11,12 +11,12 @@ public class RepGraficaUnica : RepresentacionGrafica
         representacionGrafica = rep;
     }
 
-    public override void MoveGraphics(int posX, int posY)
+    public void MoveGraphics(int posX, int posY)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void UpdateGraphics(GameObject toActivate)
+    public void UpdateGraphics(GameObject toActivate)
     {
         representacionGrafica = toActivate;
         representacionGrafica.SetActive(true);

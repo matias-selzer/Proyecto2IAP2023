@@ -6,12 +6,9 @@ public abstract class Entidad
 {
     protected int puntos,tiempoDeVida;
     protected RepresentacionGrafica representacionGrafica;
-    protected Node nodoActual;
+    private Node nodoActual;
 
-    public void SetNode(Node n)
-    {
-        nodoActual = n;
-    }
+    public Node NodoActual { get => nodoActual; set => nodoActual = value; }
 
     public virtual void SerVisitado()
     {

@@ -64,7 +64,7 @@ public class Factory : MonoBehaviour
         int costo = GetCosto(objectCode);
 
         GameObject instancia = Instantiate(objectPrefab, new Vector3(posx, alturaInicial, posy), Quaternion.identity);
-        RepresentacionGrafica repGrafica = new RepGraficaUnica(instancia);
+        RepresentacionGrafica repGrafica = new RepresentacionGrafica(instancia);
 
         nuevaEntidad = new Piso(repGrafica);
         
