@@ -10,8 +10,23 @@ public class Mapa
     public Mapa(int tamañoX, int tamañoY)
     {
         mapa = new Node[tamañoX, tamañoY];
-        Debug.Log("Tamaño X: " + tamañoX);
-        Debug.Log("Tamaño Y: " + tamañoY);
+        //Debug.Log("Tamaño X: " + tamañoX);
+        //Debug.Log("Tamaño Y: " + tamañoY);
+    }
+
+    public Node ObtenerNodoDisponible()
+    {
+        Node nodoDisponible=null;
+        while (nodoDisponible == null)
+        {
+            int f = Random.Range(0, ObtenerTamañoX() - 1);
+            int c = Random.Range(0, ObtenerTamañoY() - 1);
+            if (mapa[f, c].CantidadDeEntidades() == 1)
+            {
+                nodoDisponible = mapa[f, c];
+            }
+        }
+        return nodoDisponible;
     }
 
     public Node ObtenerNodo(int posX,int posY)

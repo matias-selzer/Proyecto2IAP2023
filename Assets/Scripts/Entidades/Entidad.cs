@@ -15,8 +15,10 @@ public abstract class Entidad
         representacionGrafica.MoveGraphics(nodoActual.PosX, nodoActual.PosY);
     }
 
-    public virtual void SerVisitado(GameManager gameManager)
+    /*public virtual void SerVisitado(GameManager gameManager)
     {
         Debug.Log("Me visitan - soy una Entidad");
-    }
+    }*/
+
+    public abstract void Visitar(Visitor v); //debe ser implementado por todos los hijos
 }

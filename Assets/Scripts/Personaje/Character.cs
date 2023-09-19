@@ -78,9 +78,14 @@ public class Character : Entidad
         }
     }
 
-    public override void SerVisitado(GameManager gameManager)
+    /*public override void SerVisitado(GameManager gameManager)
     {
         //Debug.Log("Me visitan - soy el Personaje");
+    }*/
+
+    public override void Visitar(Visitor v)
+    {
+        v.Visit(this);
     }
 
 }

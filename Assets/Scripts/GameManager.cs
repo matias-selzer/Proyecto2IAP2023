@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour,Visitor
 {
     //public GameObject camara;
     public Factory factory;
@@ -11,10 +11,12 @@ public class GameManager : MonoBehaviour
     private Character personaje;
 
     private Node nodoAnterior;
+    private List<Node> objetivos;
 
     // Start is called before the first frame update
     void Start()
     {
+        objetivos = new List<Node>();
         ReadMap();
        // AsignarVecinos();
         CrearPersonaje(3,3); //hallar lugar libre
@@ -24,7 +26,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Node nuevoObjeto = grilla.ObtenerNodoDisponible();
+            Entidad nuevaPocion = factory.CreatePocion(nuevoObjeto.PosX, nuevoObjeto.PosY);
+            nuevoObjeto.AddEntity(nuevaPocion);
+            nuevaPocion.NodoActual = nuevoObjeto;
+        }
     }
 
     public void MoverPersonaje()
@@ -32,6 +40,8 @@ public class GameManager : MonoBehaviour
         personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,5));
         personaje.Mover(this);
     }
+
+
 
 
     private void ReadMap()
@@ -50,13 +60,17 @@ public class GameManager : MonoBehaviour
             {
                 char objectCode = lineas[i].ToCharArray()[j];
 
-                Entidad nuevaEntidad=factory.CreateEntity(objectCode, i, j);
-                
-
-                //GameObject nuevoObjecto = Instantiate(objectPrefab, new Vector3(i, alturaInicial, j), Quaternion.identity) as GameObject;
+                List<Entidad> nuevasEntidades=factory.CreateEntities(objectCode, i, j);
+ 
                 Node nuevoNodo = new Node(i, j);
-                nuevoNodo.AddEntity(nuevaEntidad);
-                nuevaEntidad.NodoActual = nuevoNodo;
+
+                foreach(Entidad e in nuevasEntidades)
+                {
+                    nuevoNodo.AddEntity(e);
+                    e.NodoActual = nuevoNodo;
+                }
+               
+                
                 //crear objeto ambiente con costo y agregarselo al nodo
                 grilla.AddNode(nuevoNodo, i, j);
 
@@ -121,7 +135,7 @@ public class GameManager : MonoBehaviour
         personaje.UpdateRepresentacionGrafica();
     }
 
-    public void ColisionConPared()
+    /*public void ColisionConPared()
     {
         VolverPersonaje();
     }
@@ -131,5 +145,25 @@ public class GameManager : MonoBehaviour
     {
         //sumar puntos o lo que sea
         Debug.Log("Agarre una poción");
+    }*/
+
+    public void Visit(Pared p)
+    {
+        VolverPersonaje();
+    }
+
+    public void Visit(Piso p)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void Visit(Pocion p)
+    {
+        Debug.Log("Agarre una poción");
+    }
+
+    public void Visit(Character p)
+    {
+        //throw new System.NotImplementedException();
     }
 }

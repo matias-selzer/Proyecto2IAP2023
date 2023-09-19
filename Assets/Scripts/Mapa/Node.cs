@@ -35,7 +35,7 @@ public class Node
         {
             foreach (Entidad e in entidades)
             {
-                e.SerVisitado(gameManager);
+                e.Visitar(gameManager);
             }
         }
         catch (Exception e)
@@ -43,5 +43,10 @@ public class Node
 
         }
         
+    }
+
+    public int CantidadDeEntidades()
+    {
+        return entidades.Count;
     }
 }

@@ -9,8 +9,13 @@ public class Piso : ObjetoAmbiente
         representacionGrafica = rep;
     }
 
-    public override void SerVisitado(GameManager gameManager)
+    /*public override void SerVisitado(GameManager gameManager)
     {
         //Debug.Log("Me visitan - soy el Piso");
+    }*/
+
+    public override void Visitar(Visitor v)
+    {
+        v.Visit(this);
     }
 }

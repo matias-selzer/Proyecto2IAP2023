@@ -55,32 +55,68 @@ public class Factory : MonoBehaviour
         return prefab;
     }
 
-    public Entidad CreateEntity(char objectCode, int posx,int posy)
+    public List<Entidad> CreateEntities(char objectCode, int posx,int posy)
+    {
+        List<Entidad> entities = new List<Entidad>();
+        entities.Add(CreateBase(posx, posy));
+
+        if (objectCode != '0')
+        {
+            float alturaInicial = GetAltura(objectCode);
+            GameObject objectPrefab = GetPrefab(objectCode);
+            int costo = GetCosto(objectCode);
+
+            GameObject instancia = Instantiate(objectPrefab, new Vector3(posx, alturaInicial, posy), Quaternion.identity);
+            RepresentacionGrafica repGrafica = new RepresentacionGrafica(instancia);
+
+            if (objectCode == '1')
+            {
+                entities.Add(new Pared(repGrafica));
+            }
+            else if (objectCode == '2')
+            {
+                entities.Add(new Pocion(repGrafica));
+            }
+            else if (objectCode == '3')
+            {
+                entities.Add(new Pocion(repGrafica));
+            }
+
+        }
+
+        return entities;
+    }
+
+    public Entidad CreateBase(int posx, int posy)
     {
         Entidad nuevaEntidad;
 
-        float alturaInicial = GetAltura(objectCode);
-        GameObject objectPrefab = GetPrefab(objectCode);
-        int costo = GetCosto(objectCode);
+        float alturaInicial = GetAltura('0');
+        GameObject objectPrefab = GetPrefab('0');
+        int costo = GetCosto('0');
 
         GameObject instancia = Instantiate(objectPrefab, new Vector3(posx, alturaInicial, posy), Quaternion.identity);
         RepresentacionGrafica repGrafica = new RepresentacionGrafica(instancia);
 
         nuevaEntidad = new Piso(repGrafica);
-        
-        if (objectCode == '1')
-        {
-            nuevaEntidad = new Pared(repGrafica);
-        }
-        else if (objectCode == '2')
-        {
-            nuevaEntidad = new Pocion(repGrafica);
-        }
-        else if (objectCode == '3')
-        {
-            nuevaEntidad = new Pocion(repGrafica);
-        }
 
+      
+
+        return nuevaEntidad;
+    }
+
+    public Entidad CreatePocion(int posx, int posy)
+    {
+        Entidad nuevaEntidad;
+
+        float alturaInicial = GetAltura('2');
+        GameObject objectPrefab = GetPrefab('2');
+        int costo = GetCosto('2');
+
+        GameObject instancia = Instantiate(objectPrefab, new Vector3(posx, alturaInicial, posy), Quaternion.identity);
+        RepresentacionGrafica repGrafica = new RepresentacionGrafica(instancia);
+
+        nuevaEntidad = new Pocion(repGrafica);
 
         return nuevaEntidad;
     }

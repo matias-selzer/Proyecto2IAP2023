@@ -9,10 +9,19 @@ public class Pocion : Tesoro
         representacionGrafica = rep;
     }
 
-    public override void SerVisitado(GameManager gameManager)
+    public override void Visitar(Visitor v)
+    {
+        representacionGrafica.DestroyGraphics();
+        NodoActual.RemoveEntity(this);
+        v.Visit(this);
+    }
+
+    /*public override void SerVisitado(GameManager gameManager)
     {
         representacionGrafica.DestroyGraphics();
         NodoActual.RemoveEntity(this);
         gameManager.AgarrarPocion();
-    }
+    }*/
+
+
 }

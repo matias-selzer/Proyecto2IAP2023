@@ -9,8 +9,13 @@ public class Pared : ObjetoAmbiente
         representacionGrafica = rep;
     }
 
-    public override void SerVisitado(GameManager gameManager)
+    public override void Visitar(Visitor v)
+    {
+        v.Visit(this);
+    }
+
+   /* public override void SerVisitado(GameManager gameManager)
     {
         gameManager.ColisionConPared();
-    }
+    }*/
 }
