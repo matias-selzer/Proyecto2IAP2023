@@ -49,4 +49,15 @@ public class Node
     {
         return entidades.Count;
     }
+    
+    //esto no debería estar
+    public int CostoTotal()
+    {
+        int costoTotal = 0;
+        foreach(Entidad e in entidades)
+        {
+            costoTotal += e.Costo;
+        }
+        return costoTotal;
+    }
 }

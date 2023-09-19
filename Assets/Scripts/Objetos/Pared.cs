@@ -7,6 +7,7 @@ public class Pared : ObjetoAmbiente
     public Pared(RepresentacionGrafica rep)
     {
         representacionGrafica = rep;
+        Costo = 1000;
     }
 
     public override void Visitar(Visitor v)

@@ -7,6 +7,7 @@ public class Piso : ObjetoAmbiente
     public Piso(RepresentacionGrafica rep)
     {
         representacionGrafica = rep;
+        Costo = 1;
     }
 
     /*public override void SerVisitado(GameManager gameManager)

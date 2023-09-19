@@ -7,8 +7,10 @@ public abstract class Entidad
     protected int puntos,tiempoDeVida;
     protected RepresentacionGrafica representacionGrafica;
     private Node nodoActual;
+    private int costo;
 
     public Node NodoActual { get => nodoActual; set => nodoActual = value; }
+    public int Costo { get => costo; set => costo = value; }
 
     public virtual void UpdateRepresentacionGrafica()
     {
