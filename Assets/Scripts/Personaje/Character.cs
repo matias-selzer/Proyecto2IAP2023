@@ -25,12 +25,13 @@ public class Character : Entidad
     
     
 
-    public void Mover(GameManager gameManager)
+    public void Mover(GameManager gameManager, List<Node>objetivos)
     {
-        //Debug.Log("Conocimiento: " + conocimiento.Count);
+        Debug.Log("Conocimiento: " + conocimiento.Count);
+        Debug.Log("Objetivos: " + objetivos.Count);
         if (camino.Count == 0)
         {
-            camino= inteligencia.CalcularMovimiento(conocimiento,conocimiento,NodoActual);
+            camino= inteligencia.CalcularMovimiento(conocimiento, objetivos, NodoActual);
         }
         else
         {

@@ -11,9 +11,10 @@ public class Pocion : Tesoro
 
     public override void Visitar(Visitor v)
     {
+        
+        v.Visit(this);
         representacionGrafica.DestroyGraphics();
         NodoActual.RemoveEntity(this);
-        v.Visit(this);
     }
 
     /*public override void SerVisitado(GameManager gameManager)

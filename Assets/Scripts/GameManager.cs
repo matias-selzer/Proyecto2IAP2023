@@ -28,17 +28,24 @@ public class GameManager : MonoBehaviour,Visitor
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Node nuevoObjeto = grilla.ObtenerNodoDisponible();
-            Entidad nuevaPocion = factory.CreatePocion(nuevoObjeto.PosX, nuevoObjeto.PosY);
-            nuevoObjeto.AddEntity(nuevaPocion);
-            nuevaPocion.NodoActual = nuevoObjeto;
+            CrearNuevaPocion();
         }
+    }
+
+    private void CrearNuevaPocion()
+    {
+        Node nuevoObjeto = grilla.ObtenerNodoDisponible();
+        Entidad nuevaPocion = factory.CreatePocion(nuevoObjeto.PosX, nuevoObjeto.PosY);
+        nuevoObjeto.AddEntity(nuevaPocion);
+        nuevaPocion.NodoActual = nuevoObjeto;
+
+        objetivos.Add(nuevoObjeto);
     }
 
     public void MoverPersonaje()
     {
         personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,5));
-        personaje.Mover(this);
+        personaje.Mover(this, objetivos);
     }
 
 
@@ -78,6 +85,11 @@ public class GameManager : MonoBehaviour,Visitor
         }
     }
 
+    public void AgregarNodoObjetivo(Node n)
+    {
+        objetivos.Add(n);
+    }
+
     private void CrearGrilla(int tamañox, int tamañoy)
     {
         grilla = new Mapa(tamañox, tamañoy);
@@ -92,7 +104,7 @@ public class GameManager : MonoBehaviour,Visitor
     private void CrearPersonaje(int posX,int posY)
     {
         personaje= GetComponent<CharacterFactory>().CrearPersonaje(posX,posY);
-        personaje.ActualizarConocimiento(ObtenerContexto(posX,posY,5));
+        personaje.ActualizarConocimiento(ObtenerContexto(posX,posY,20));
         grilla.AddEntity(posX, posY, personaje);
         personaje.NodoActual = grilla.ObtenerNodo(posX, posY);
     }
@@ -159,6 +171,7 @@ public class GameManager : MonoBehaviour,Visitor
 
     public void Visit(Pocion p)
     {
+        objetivos.Remove(p.NodoActual);
         Debug.Log("Agarre una poción");
     }
 

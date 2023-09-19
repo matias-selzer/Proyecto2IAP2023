@@ -8,6 +8,7 @@ public class InteligenciaArtificialObjetivoMasCercano : Artificial
     public override List<Node> CalcularMovimiento(List<Node> conocimiento, List<Node> objetivos, Node nodoActual)
     {
         List<Node> camino = new List<Node>();
+        Debug.Log(objetivos.Count);
         Node mejorObjetivo = ObtenerMejorObjetivo(objetivos, nodoActual);
         List<Node> vecinos = ObtenerNodosVecinos(conocimiento, nodoActual);
         Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinos);
