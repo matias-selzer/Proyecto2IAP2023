@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour,Visitor
 {
     //public GameObject camara;
     public Factory factory;
+
+    public TMP_Text textPuntos;
+    private int puntos = 0;
 
     private Mapa grilla;
     private Character personaje;
@@ -175,7 +179,8 @@ public class GameManager : MonoBehaviour,Visitor
     public void Visit(Pocion p)
     {
         objetivos.Remove(p.NodoActual);
-        Debug.Log("Agarre una poción");
+        puntos += 10;
+        textPuntos.text = "Puntos\n"+puntos + "";
     }
 
     public void Visit(Character p)
