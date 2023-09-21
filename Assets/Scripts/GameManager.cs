@@ -48,7 +48,10 @@ public class GameManager : MonoBehaviour,Visitor
         personaje.Mover(this, objetivos);
     }
 
-
+    public void GameOver()
+    {
+        Debug.Log("GameOver");
+    }
 
 
     private void ReadMap()
