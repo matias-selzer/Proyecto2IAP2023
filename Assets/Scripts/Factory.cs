@@ -79,7 +79,7 @@ public class Factory : MonoBehaviour
             }
             else if (objectCode == '3')
             {
-                entities.Add(new Pocion(repGrafica));
+                entities.Add(new Agua(repGrafica));
             }
 
         }

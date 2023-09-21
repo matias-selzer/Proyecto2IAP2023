@@ -8,8 +8,8 @@ public class CharacterFactory : MonoBehaviour
 
     public Character CrearPersonaje(int posX,int posY)
     {
-        //Inteligencia i = new Teclado();
-        Inteligencia i = new InteligenciaArtificialObjetivoMasCercano();
+        Inteligencia i = new Teclado();
+        //Inteligencia i = new InteligenciaArtificialObjetivoMasCercano();
         //Inteligencia i = new InteligenciaMati();
         GameObject representacionGraficaPersonaje = Instantiate(representacionGraficaPrefab, new Vector3(posX, 0, posY), representacionGraficaPrefab.transform.rotation) as GameObject;
         RepresentacionGrafica r = new RepresentacionGrafica(representacionGraficaPersonaje);

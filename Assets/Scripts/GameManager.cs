@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour,Visitor
         ReadMap();
        // AsignarVecinos();
         CrearPersonaje(3,3); //hallar lugar libre
-        InvokeRepeating("MoverPersonaje", 0, 0.3f);
+        InvokeRepeating("MoverPersonaje", 0, 0.05f);
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour,Visitor
 
     private void ReadMap()
     {
-        string textFile = Resources.Load("Mapa1").ToString();
+        string textFile = Resources.Load("Mapa2").ToString();
         string[] lineas = textFile.Split("\n");
 
         int tamañox = lineas.Length;
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour,Visitor
 
     private List<Node> ObtenerContexto(int posX,int posY, int distancia)
     {
-        List<Node> contexto = new List<Node>();
+        List<Node> contexto = new List<Node>(); //la distancia no funciona
         for (int i = posX - distancia / 2; i < posX + distancia / 2; i++)
         {
             if (grilla.DentroDeLasFilas(i))
