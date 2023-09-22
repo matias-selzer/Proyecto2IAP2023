@@ -7,7 +7,7 @@ public class Character : Entidad
     private Inteligencia inteligencia;
     private List<Node> conocimiento;
     private List<Node> camino;
-   
+    private List<Node> objetivos;
 
     public Character(Inteligencia i, RepresentacionGrafica rep)
     {
@@ -15,23 +15,36 @@ public class Character : Entidad
         inteligencia = i;
         conocimiento = new List<Node>();
         camino = new List<Node>();
+        objetivos = new List<Node>();
     }
-   
-        //transform.position = Vector3.Lerp(transform.position, targetPosition, 5 * Time.deltaTime);
-    
+
+    //transform.position = Vector3.Lerp(transform.position, targetPosition, 5 * Time.deltaTime);
 
 
-
-    
-    
-
-    public void Mover(GameManager gameManager, List<Node>objetivos)
+    /*public void AddNewObjective(Node n)
     {
-        Debug.Log("Conocimiento: " + conocimiento.Count);
-        Debug.Log("Objetivos: " + objetivos.Count);
+        if (conocimiento.Contains(n))
+        {
+            objetivos.Add(n);
+        }
+    }*/
+
+    public void RemoveObjective(Node n)
+    {
+        objetivos.Remove(n);
+        Debug.Log("pepe)");
+    }
+    
+    
+
+    public void Mover(GameManager gameManager)
+    {
+        //Debug.Log("Conocimiento: " + conocimiento.Count);
+        //Debug.Log("Objetivos: " + objetivos.Count);
         if (camino.Count == 0)
         {
-            camino= inteligencia.CalcularMovimiento(conocimiento, objetivos, NodoActual);
+            if(objetivos.Count>0)
+                camino= inteligencia.CalcularMovimiento(conocimiento, objetivos, NodoActual);
         }
         else
         {
@@ -67,14 +80,22 @@ public class Character : Entidad
         representacionGrafica.MoveGraphics(PosY, PosX);
     }*/
 
-    public void ActualizarConocimiento(List<Node> contexto)
+    public void ActualizarConocimiento(List<Node> contexto, List<Node> objetivosDelMapa)
     {
-        //hacer que agregue una copia del noto y no una referencia
+        //hacer que agregue una copia del nodo y no una referencia
         foreach(Node n in contexto)
         {
             if (!conocimiento.Contains(n))
             {
                 conocimiento.Add(n);
+            }
+        }
+
+        foreach(Node n in objetivosDelMapa)
+        {
+            if (!objetivos.Contains(n))
+            {
+                objetivos.Add(n);
             }
         }
     }

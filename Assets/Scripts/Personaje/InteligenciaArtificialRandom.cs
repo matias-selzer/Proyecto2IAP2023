@@ -2,54 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class InteligenciaMati : Artificial
+public class InteligenciaArtificialRandom : Artificial
 {
     public override List<Node> CalcularMovimiento(List<Node> conocimiento, List<Node> objetivos, Node nodoActual)
     {
         List<Node> camino = new List<Node>();
-        Node mejorObjetivo = ObtenerMejorObjetivo(objetivos, nodoActual);
+
         List<Node> vecinos = ObtenerNodosVecinos(conocimiento, nodoActual);
-        Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinos);
-        camino.Add(mejorVecino);
+
+        int r = Random.Range(0, vecinos.Count);
+
+        camino.Add(vecinos[r]);
         return camino;
+    }
+
+    private List<Node> VecinosMenosCostosos(List<Node> vecinos)
+    {
+        List<Node> nodosMenosCostosos = new List<Node>();
+        foreach (Node n in vecinos)
+        {
+            if (n.CostoTotal() < 1000)
+            {
+                nodosMenosCostosos.Add(n);
+            }
+        }
+        return nodosMenosCostosos;
     }
 
     private Node ObtenerMejorVecino(Node mejorObjetivo, List<Node> vecinos)
     {
         Node mejorVecino = vecinos[0];
-
-        double costoMejorVecino = mejorVecino.CostoTotal() + Distance(mejorVecino, mejorObjetivo);
-        double costoVecinoActual;
-        foreach(Node n in vecinos)
-        {
-            costoVecinoActual = n.CostoTotal() + Distance(n, mejorObjetivo);
-            if (costoVecinoActual <= costoMejorVecino)
-            {
-                costoMejorVecino = costoVecinoActual;
-                mejorVecino = n;
-
-                Debug.Log(costoMejorVecino +  " " + Distance(n, mejorObjetivo));
-            }
-        }
-
-
-        /*int costoActual = 5;
         foreach (Node n in vecinos)
         {
-            if (n.CostoTotal() <= costoActual)
+            if (Distance(n, mejorObjetivo) < Distance(mejorVecino, mejorObjetivo))
             {
-                if(Distance(n, mejorObjetivo) < Distance(mejorVecino, mejorObjetivo)){
-                    mejorVecino = n;
-                    costoActual = n.CostoTotal();
-                }
+                mejorVecino = n;
             }
-            //if (Distance(n, mejorObjetivo) < Distance(mejorVecino, mejorObjetivo) && n.CostoTotal()<=costoActual)
-            //{
-            //    mejorVecino = n;
-            //    costoActual = n.CostoTotal();
-            //}
-        }*/
+        }
         return mejorVecino;
     }
 
@@ -78,7 +69,8 @@ public class InteligenciaMati : Artificial
         {
             if (CalcularDistanciaManhattan(n.PosX, n.PosY, nodoActual.PosX, nodoActual.PosY) <= 1)
             {
-                vecinos.Add(n);
+                if(n.CostoTotal()<1000)
+                    vecinos.Add(n);
             }
         }
         return vecinos;

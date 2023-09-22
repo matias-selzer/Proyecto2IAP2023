@@ -8,12 +8,29 @@ public class InteligenciaArtificialObjetivoMasCercano : Artificial
     public override List<Node> CalcularMovimiento(List<Node> conocimiento, List<Node> objetivos, Node nodoActual)
     {
         List<Node> camino = new List<Node>();
-        Debug.Log(objetivos.Count);
+        //Debug.Log(objetivos.Count);
         Node mejorObjetivo = ObtenerMejorObjetivo(objetivos, nodoActual);
         List<Node> vecinos = ObtenerNodosVecinos(conocimiento, nodoActual);
+
+        //List<Node> vecinosMenosCostosos = VecinosMenosCostosos(vecinos);
+        //Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinosMenosCostosos);
+
         Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinos);
         camino.Add(mejorVecino);
         return camino;
+    }
+
+    private List<Node> VecinosMenosCostosos (List<Node> vecinos)
+    {
+        List<Node> nodosMenosCostosos = new List<Node>();
+        foreach(Node n in vecinos)
+        {
+            if (n.CostoTotal() < 1000)
+            {
+                nodosMenosCostosos.Add(n);
+            }
+        }
+        return nodosMenosCostosos;
     }
 
     private Node ObtenerMejorVecino(Node mejorObjetivo,List<Node> vecinos)

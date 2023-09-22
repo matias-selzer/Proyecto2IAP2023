@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour,Visitor
 {
     //public GameObject camara;
-    public Factory factory;
+    public CreadorDeObjetos factory;
 
     public TMP_Text textPuntos;
     private int puntos = 0;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour,Visitor
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             CrearNuevaPocion();
         }
@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour,Visitor
 
     public void MoverPersonaje()
     {
-        personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,5));
-        personaje.Mover(this, objetivos);
+        personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,2),objetivos);
+        personaje.Mover(this);
     }
 
     public void GameOver()
@@ -110,8 +110,8 @@ public class GameManager : MonoBehaviour,Visitor
  
     private void CrearPersonaje(int posX,int posY)
     {
-        personaje= GetComponent<CharacterFactory>().CrearPersonaje(posX,posY);
-        personaje.ActualizarConocimiento(ObtenerContexto(posX,posY,20));
+        personaje= GetComponent<CreadorDePersonaje>().CrearPersonaje(posX,posY);
+        personaje.ActualizarConocimiento(ObtenerContexto(posX,posY,20),objetivos);
         grilla.AddEntity(posX, posY, personaje);
         personaje.NodoActual = grilla.ObtenerNodo(posX, posY);
     }
@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour,Visitor
     public void Visit(Pocion p)
     {
         objetivos.Remove(p.NodoActual);
+        personaje.RemoveObjective(p.NodoActual);
         puntos += 10;
         textPuntos.text = "Puntos\n"+puntos + "";
     }
