@@ -24,15 +24,16 @@ public class GameManager : MonoBehaviour,Visitor
         ReadMap();
        // AsignarVecinos();
         CrearPersonaje(3,3); //hallar lugar libre
-        InvokeRepeating("MoverPersonaje", 0, 0.05f);
+        //InvokeRepeating("MoverPersonaje", 0, 0.05f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             CrearNuevaPocion();
+            MoverPersonaje();
         }
     }
 

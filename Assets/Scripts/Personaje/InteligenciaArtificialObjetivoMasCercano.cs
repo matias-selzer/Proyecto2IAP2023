@@ -12,10 +12,10 @@ public class InteligenciaArtificialObjetivoMasCercano : Artificial
         Node mejorObjetivo = ObtenerMejorObjetivo(objetivos, nodoActual);
         List<Node> vecinos = ObtenerNodosVecinos(conocimiento, nodoActual);
 
-        //List<Node> vecinosMenosCostosos = VecinosMenosCostosos(vecinos);
-        //Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinosMenosCostosos);
+        List<Node> vecinosMenosCostosos = VecinosMenosCostosos(vecinos);
+        Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinosMenosCostosos);
 
-        Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinos);
+        //Node mejorVecino = ObtenerMejorVecino(mejorObjetivo, vecinos);
         camino.Add(mejorVecino);
         return camino;
     }
