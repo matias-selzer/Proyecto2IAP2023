@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour,Visitor
         ReadMap();
        // AsignarVecinos();
         CrearPersonaje(3,3); //hallar lugar libre
-        //InvokeRepeating("MoverPersonaje", 0, 0.05f);
+        InvokeRepeating("MoverPersonaje", 0, 0.05f);
+        InvokeRepeating("CrearNuevaPocion", 0, 5f);
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour,Visitor
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CrearNuevaPocion();
-            MoverPersonaje();
+            //MoverPersonaje();
         }
     }
 
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour,Visitor
 
     public void MoverPersonaje()
     {
-        personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,2),objetivos);
+        personaje.ActualizarConocimiento(ObtenerContexto(personaje.NodoActual.PosX,personaje.NodoActual.PosY,20),objetivos);
         personaje.Mover(this);
     }
 
